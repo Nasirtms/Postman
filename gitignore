@@ -1,0 +1,22 @@
+# Node / tooling
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS
+.DS_Store
+
+# Environments & secrets (do not commit real secrets)
+*.env
+.env.*
+*.secret
+secrets.json
+
+# Postman environment files that contain secrets (if you want to ignore them)
+# Remove this line if you commit sanitized environment files without secrets
+*.postman_environment.json
+*.postman_globals.json
+
+# Editor files
+.vscode/
+.idea/
