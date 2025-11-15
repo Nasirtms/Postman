@@ -22,11 +22,11 @@ Local testing with Newman
 1. Install newman:
    - npm: npm install -g newman
 2. Run a collection:
-   - newman run collections/your-collection.json
+   - newman run collections/your-collection.postman_collection.json
 3. If you need environment variables:
-   - newman run collections/your-collection.json -e environments/dev.postman_environment.json
+   - newman run collections/your-collection.postman_collection.json -e environments/dev.postman_environment.json
 4. To pass secrets from environment variables (avoid committing secrets):
-   - newman run collections/your-collection.json --env-var "API_KEY=$API_KEY"
+   - newman run collections/your-collection.postman_collection.json --env-var "API_KEY=$API_KEY"
 
 CI (GitHub Actions) notes
 - The repo includes an example workflow that installs newman and runs collections on push/PR.
@@ -44,8 +44,6 @@ Naming conventions
 - Use semantic naming and include a version field in collection documentation when relevant.
 
 Suggested next steps
-- Add a signed license (MIT or similar) if you want others to reuse the collections.
-- If you want automation, let me push the example workflow and README into your repo.
-- If you want I can also convert exported Postman collections into a structured folder layout for you.
-
-If you'd like, I can create the files below in your repository (on a branch) and open a PR. Do you want me to push those now? If yes, which branch name should I use (e.g. `setup/newman-ci`)?
+- Add a license (MIT) if you want others to reuse the collections.
+- If you want automation, I can push the example workflow and README into your repo.
+- I can convert exported Postman collections into the structured folder layout for you.
