@@ -1,0 +1,4698 @@
+{
+	"info": {
+		"_postman_id": "44821427-cca8e973-50d7-4778-ae67-7db484ea54c5",
+		"name": "Casino Backend API - Complete",
+		"description": "Complete API collection for Casino Backend with all latest features including session management, notifications, and game functionality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"id": "44821427-deed2f08-91f2-4367-a3f0-944c97709f31",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.3"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"777@tms.com\",\n    \"password\": \"pass123\",\n    \"username\": \"test Player\",\n    \"role\": \"player\",\n    \"cashierId\": null,\n    \"bio\": \"New player\",\n    \"avatarUrl\": \"https://kggzubvrtaicqajiysix.supabase.co/storage/v1/object/public/profileimage//6.png\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "Register a new user with automatic login and session creation"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"id": "44821427-672a4ac8-fe2e-4aa7-bb0d-27964acc7eb4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.3"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Login with session management. Response includes session info if user was logged in on another device."
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"id": "44821427-543b6aca-fa1b-480c-91f7-f131e4184923",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.3"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Login with session management. Response includes session info if user was logged in on another device."
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"id": "44821427-02fe4557-42d5-4ddb-b242-0436cbe3f429",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"currentpassword123\",\n    \"newPassword\": \"newpassword123\",\n    \"confirmPassword\": \"newpassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/change-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"change-password"
+							]
+						},
+						"description": "Change user password (requires old password verification)"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password (Admin)",
+					"id": "44821427-e5250d68-fdf5-425b-8e4c-03a2c9af5828",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userId}}\",\n    \"defaultPassword\": \"DefaultPass123!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"reset-password"
+							]
+						},
+						"description": "Reset user password (Admin only - no old password required)"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-be077847-da88-412f-8896-676bfcb36bdb"
+		},
+		{
+			"name": "Session Management",
+			"item": [
+				{
+					"name": "Connect to Session Hub",
+					"id": "44821427-223f572a-c6d9-46b9-99c2-c3a3a8120a15",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/session/connect",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"session",
+								"connect"
+							]
+						},
+						"description": "Initialize connection to session management"
+					},
+					"response": []
+				},
+				{
+					"name": "Disconnect from Session Hub",
+					"id": "44821427-6ef671ec-1623-4317-95fa-80ed6feefa7c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/session/disconnect",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"session",
+								"disconnect"
+							]
+						},
+						"description": "Disconnect from session management"
+					},
+					"response": []
+				},
+				{
+					"name": "Check User Session",
+					"id": "44821427-ac83265f-1b7e-43c3-8cd1-3dea4a912502",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userId}}\",\n    \"sessionId\": \"{{sessionId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/check-session",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"check-session"
+							]
+						},
+						"description": "Check if the user's session is still valid. Send the sessionId from login response in the request body. Returns a forced logout message if the session is expired or replaced."
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-eb94146e-b8c8-4f9a-a9f0-00e48db73d11"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User Profile",
+					"id": "44821427-5d670feb-6761-4bf6-b523-2173d4492589",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						},
+						"description": "Get current user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Can Update Player Coins",
+					"id": "44821427-b556490d-1d11-480a-92d4-4598c065b139",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"019739fd-3a96-713e-91bb-a1475de0bba9\",\r\n  \"canAddCoin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/update-canaddcoin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"update-canaddcoin"
+							]
+						},
+						"description": "Get current user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Coins",
+					"id": "44821427-1f24c4d1-7182-40d0-acaa-8316d7c05506",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						},
+						"description": "Get current user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"id": "44821427-d71378bb-3b99-45e9-97ee-95a88bfd3f9d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"nasir\",\n    \"email\": \"updated@example.com\",\n    \"bio\": \"Updated bio\",\n    \"avatarUrl\": \"https://kggzubvrtaicqajiysix.supabase.co/storage/v1/object/public/profileimage//image1x1.png\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						},
+						"description": "Update user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users (Admin)",
+					"id": "44821427-4380a948-a1bb-4d04-82d1-db528225624f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Get all users (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users for Selection (Admin)",
+					"id": "44821427-ed08e458-be61-409b-8985-f478cfce6ad9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/for-selection?searchTerm=john&role=player",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"for-selection"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "john",
+									"description": "Search by username, email, or user game ID"
+								},
+								{
+									"key": "role",
+									"value": "player",
+									"description": "Filter by user role (optional)"
+								}
+							]
+						},
+						"description": "Get users for selection in notifications (Admin only) - supports search and role filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Leaderboard",
+					"id": "44821427-eba62bf1-8ec6-43bd-b403-84b72f31b8b2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/leaderboard",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"leaderboard"
+							]
+						},
+						"description": "Get global leaderboard"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Notifications",
+					"id": "44821427-00a5e95b-b253-4db0-86ff-b79f655962ce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Get all active notifications for current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notifications by Type",
+					"id": "44821427-87a77108-1c1d-447a-ad65-02e8e030e3aa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications/{{notificationType}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications",
+								"{{notificationType}}"
+							]
+						},
+						"description": "Get all active notifications of a specific type (e.g., session, achievement, reward)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Latest Notification by Type",
+					"id": "44821427-32867725-1c94-4f61-809b-52f39bac4ce6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications/{{notificationType}}/latest",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications",
+								"{{notificationType}}",
+								"latest"
+							]
+						},
+						"description": "Get the latest active notification of a specific type"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Notification",
+					"id": "44821427-522b2a10-3e45-43c6-aaf5-1c88d5df9e3f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Welcome Back!\",\n    \"message\": \"You have successfully logged in from a new device.\",\n    \"notificationType\": \"session\",\n    \"expiresAt\": \"2024-01-15T10:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Create a new notification for current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Notification as Read",
+					"id": "44821427-64053234-ee89-4bfd-b36a-4f15732379a0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications/{{notificationId}}/mark-read",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications",
+								"{{notificationId}}",
+								"mark-read"
+							]
+						},
+						"description": "Mark a specific notification as read"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Session Notification",
+					"id": "44821427-0a85e9de-fca9-461d-b10f-870762289583",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Device Login\",\n    \"message\": \"Your account has been logged in from a new device. Previous login: 2024-01-10 15:30:00 from Chrome on Windows\",\n    \"notificationType\": \"session\",\n    \"expiresAt\": \"2024-01-15T10:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Create a session notification (automatically created on new device login)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Achievement Notification",
+					"id": "44821427-111027c9-4694-480e-b0da-5aecf97a233a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Achievement Unlocked!\",\n    \"message\": \"Congratulations! You've unlocked the 'High Roller' achievement!\",\n    \"notificationType\": \"achievement\",\n    \"expiresAt\": \"2024-01-20T23:59:59Z\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Create an achievement notification"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reward Notification",
+					"id": "44821427-83286c17-4804-45ff-970d-b7aee21cd32b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Daily Bonus!\",\n    \"message\": \"You've received a daily bonus of 1000 coins!\",\n    \"notificationType\": \"reward\",\n    \"expiresAt\": \"2024-01-15T23:59:59Z\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Create a reward notification"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tournament Notification",
+					"id": "44821427-511eba2f-9484-43f2-979c-c347baae853b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Tournament Starting Soon!\",\n    \"message\": \"New tournament starting in 1 hour! Join now for a chance to win big!\",\n    \"notificationType\": \"tournament\",\n    \"expiresAt\": \"2024-01-20T23:59:59Z\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Create a tournament notification"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Game Leaderboard",
+					"id": "44821427-ef242725-e474-423d-9ec9-6a92dfef9426",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/game-leaderboard/{{gameId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"game-leaderboard",
+								"{{gameId}}"
+							]
+						},
+						"description": "Get leaderboard for specific game"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Weekly Leaderboard",
+					"id": "44821427-a6d9cfd5-8f6f-406e-ad81-9ab54cf80984",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/weekly-leaderboard",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"weekly-leaderboard"
+							]
+						},
+						"description": "Get weekly leaderboard (auto-generated every Monday using user coin balances)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Weekly Leaderboard by Date",
+					"id": "44821427-fde860ba-49d2-4020-8c77-b3a87dd6247b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/weekly-leaderboard/{{weekStartDate}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"weekly-leaderboard",
+								"{{weekStartDate}}"
+							]
+						},
+						"description": "Get weekly leaderboard for specific week (format: YYYY-MM-DD)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Daily Stats",
+					"id": "44821427-255f19ee-f96b-4ec8-9981-d4568d71d740",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/daily-stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"daily-stats"
+							]
+						},
+						"description": "Get user's daily statistics"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Win History",
+					"id": "44821427-235a4dc7-6fc4-4dc5-8fbd-400412aa1d19",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/win-history",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"win-history"
+							]
+						},
+						"description": "Get user's win history"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password (Admin)",
+					"id": "44821427-fd773792-dd04-4209-8f33-13cc5efc7e95",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userId}}\",\n    \"newPassword\": \"newPassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"reset-password"
+							]
+						},
+						"description": "Reset user password (Admin only)"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-fdc4fe5f-218d-4e67-86b4-c60beaaf1018"
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Get All Games",
+					"id": "44821427-9fd3f3cf-1c25-407c-9636-54e48a2205b6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/games",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"games"
+							]
+						},
+						"description": "Get all available games"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Game by ID",
+					"id": "44821427-8e92b06c-19b4-4b41-9e23-ee7b9ad5ed3f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/games/{{gameId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"games",
+								"{{gameId}}"
+							]
+						},
+						"description": "Get game details by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "44821427-82bde128-d39d-47e0-9ca3-19ae214eb134",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-bda3c753-66a4-49f7-a98d-51964384deac"
+		},
+		{
+			"name": "Slot Games",
+			"item": [
+				{
+					"name": "Cloepatra",
+					"item": [
+						{
+							"name": "Spin Cleopatra",
+							"id": "44821427-0ed8c0b2-08aa-4d28-a1b9-5204ba35af22",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"betAmount\": 1.5,\n    \"requestId\": \"{{$guid}}\",\n    \"gameId\": \"cfc3dd23-2354-4060-b23e-e5c060a23848\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/cleopatra/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"cleopatra",
+										"spin"
+									]
+								},
+								"description": "Spin the Cleopatra slot machine. Requires Authorization. Body: { gameId, betAmount, [winRatio] }"
+							},
+							"response": []
+						},
+						{
+							"name": "Cleopatra simulate-rtp",
+							"id": "44821427-26ef4873-19b5-431a-8661-0c205d94add3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"betAmount\": 1.5,\n    \"requestId\": \"{{$guid}}\",\n    \"gameId\": \"{{cleopatraGameId}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/cleopatra/simulate-rtp",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"cleopatra",
+										"simulate-rtp"
+									]
+								},
+								"description": "Spin the Cleopatra slot machine. Requires Authorization. Body: { gameId, betAmount, [winRatio] }"
+							},
+							"response": []
+						},
+						{
+							"name": "Cleopatra Test Payout Logic",
+							"id": "44821427-88b501eb-c966-43f7-9819-a6e0da3c2711",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"betAmount\": 1.5,\n    \"requestId\": \"{{$guid}}\",\n    \"gameId\": \"{{cleopatraGameId}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/cleopatra/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"cleopatra",
+										"spin"
+									]
+								},
+								"description": "Spin the Cleopatra slot machine. Requires Authorization. Body: { gameId, betAmount, [winRatio] }"
+							},
+							"response": []
+						},
+						{
+							"name": "Cleopatra Test Scatter Logic",
+							"id": "44821427-142d9d1d-9a88-442b-be35-71638ce7c3bf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"betAmount\": 1.5,\n    \"requestId\": \"{{$guid}}\",\n    \"gameId\": \"{{cleopatraGameId}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/cleopatra/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"cleopatra",
+										"spin"
+									]
+								},
+								"description": "Spin the Cleopatra slot machine. Requires Authorization. Body: { gameId, betAmount, [winRatio] }"
+							},
+							"response": []
+						},
+						{
+							"name": "Cleopatra Test Scatter Logic Copy",
+							"id": "44821427-f88b4789-5d03-4fcf-bd0c-4c4830344038",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"betAmount\": 1.5,\n    \"requestId\": \"{{$guid}}\",\n    \"gameId\": \"{{cleopatraGameId}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/cleopatra/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"cleopatra",
+										"spin"
+									]
+								},
+								"description": "Spin the Cleopatra slot machine. Requires Authorization. Body: { gameId, betAmount, [winRatio] }"
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-40577d7f-c442-4d35-b6d5-89c4d45c161d"
+				},
+				{
+					"name": "Keno",
+					"item": [
+						{
+							"name": "SuperBall Keno",
+							"item": [
+								{
+									"name": "keno spin",
+									"id": "44821427-def8bb16-3437-4046-ba48-7e3fce19b43a",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"betAmount\": 100,\n    \"gameId\": \"{{gameId}}\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/slot/spin",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"slot",
+												"spin"
+											]
+										},
+										"description": "Spin the slot machine with win ratio from game configuration"
+									},
+									"response": []
+								},
+								{
+									"name": "keno simulate-rtp",
+									"id": "44821427-9aa5ea34-7cdc-421b-9f88-442cb0098ae7",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"betAmount\": 100,\n    \"gameId\": \"{{gameId}}\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/slot/spin",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"slot",
+												"spin"
+											]
+										},
+										"description": "Spin the slot machine with win ratio from game configuration"
+									},
+									"response": []
+								}
+							],
+							"id": "44821427-d13bc1dd-89d5-47ad-ade2-b7f98f7aef25"
+						},
+						{
+							"name": "HexaGone keno",
+							"item": [
+								{
+									"name": "hexagone keno spin",
+									"id": "44821427-e568006f-3583-45d0-a31c-e1179b2f3197",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"betAmount\": 100,\n    \"gameId\": \"{{gameId}}\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/slot/spin",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"slot",
+												"spin"
+											]
+										},
+										"description": "Spin the slot machine with win ratio from game configuration"
+									},
+									"response": []
+								}
+							],
+							"id": "44821427-de5e4787-2ec4-49b9-8b36-dc7eb26a076e"
+						},
+						{
+							"name": "OctaGone Keno",
+							"item": [
+								{
+									"name": "Octagone keno spin",
+									"id": "44821427-c5b40aa8-937a-4203-baf2-ce6f377e7fab",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"betAmount\": 100,\n    \"gameId\": \"{{gameId}}\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/slot/spin",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"slot",
+												"spin"
+											]
+										},
+										"description": "Spin the slot machine with win ratio from game configuration"
+									},
+									"response": []
+								}
+							],
+							"id": "44821427-03fac066-67b7-49f6-a008-ec0ef913713e"
+						}
+					],
+					"id": "44821427-cf0b3974-391f-493f-af12-1100c6def60a"
+				},
+				{
+					"name": "Monkey Madness",
+					"item": [
+						{
+							"name": "Monkey Madness Spin",
+							"id": "44821427-86a2b5ce-320e-4d9d-8c29-644723754e00",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"betAmount\": 1.5,\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/monkeymadness/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"monkeymadness",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "simulate-rtp",
+							"id": "44821427-706b77f7-bb91-45cc-991f-8881ff8e15e7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\",\r\n    \"spinCount\": 10000,\r\n    \"betAmount\": 1.0,\r\n    \"winProbability\": 0.3\r\n}\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/MonkeyMadness/simulate-rtp-comprehensive",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"MonkeyMadness",
+										"simulate-rtp-comprehensive"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-624e890a-0bba-4f4b-82c0-ff972e7c91fe"
+				},
+				{
+					"name": "Sahara Riches",
+					"item": [
+						{
+							"name": "Sahara Riches Spin",
+							"id": "44821427-35369a29-b2eb-4dbf-8e50-afee4643442e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"gameId\": \"d4550eab-b6d7-4ad6-8065-2178823848f1\",\r\n  \"requestId\": \"{{$guid}}\",\r\n  \"betAmount\": 1.0,\r\n  \"isFreeSpin\": false,\r\n  \"scatterMultiplier\": 1.5,\r\n  \"lockedCashCollectSlots\": [\r\n//     {\r\n//       \"reelIndex\": 4,\r\n//       \"slotIndex\": 1\r\n//     }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/saharariches/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"saharariches",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-52214461-3092-4d67-8a99-0b7193ac32f8"
+				},
+				{
+					"name": "Day Of Dead",
+					"item": [
+						{
+							"name": "Day Of Dead Spin",
+							"id": "44821427-a59fda25-c246-4762-96e1-6d1ad6f21927",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{$guid}}\",\r\n  \"userId\":\"{{userId}}\",\r\n  \"gameId\": \"e1a7133f-79c7-4ba8-ae70-57cbaea0f962\",\r\n  \"betAmount\": 1.0,\r\n  \"isFreeSpin\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/dayofdead/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"dayofdead",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-54fa2ecb-b67b-4b1d-8e82-cf9bc6b5b675"
+				},
+				{
+					"name": "Vegas 7",
+					"item": [
+						{
+							"name": "Vegas7",
+							"id": "44821427-ae09cec0-fe59-4437-a397-5fb26a1a79b4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"gameId\": \"a747e858-9ab4-452c-9102-4ccf2e8e3a3f\",\r\n    \"betAmount\": 1,\r\n    \"isFreeSpin\": true,\r\n    \"scatterMultiplier\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/vegas7/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"vegas7",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-ea3b8d57-c4bc-4f03-aca4-99a6f3004ec9"
+				},
+				{
+					"name": "StarBurst Slots",
+					"item": [
+						{
+							"name": "StarBurst",
+							"id": "44821427-9fc77af7-9fda-4c24-a6db-37b0a78e9844",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"gameId\": \"35158819-2cf4-4243-b113-299c8c267fde\",\r\n    \"betAmount\": 0.10,\r\n    \"isFreeSpin\": false,\r\n    \"respinCount\": 0,\r\n    \"isReelTwoStopped\": true,\r\n    \"isReelThreeStopped\": true,\r\n    \"isReelFourStopped\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/starburstslots/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"starburstslots",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-71671a77-e383-4065-8368-fcf07d7c812e"
+				},
+				{
+					"name": "Rock Paper Scissor",
+					"item": [
+						{
+							"name": "RPS Game",
+							"id": "44821427-5a4532ff-6575-44df-9f83-863ad26dae18",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"betAmount\": 100,\n    \"gameId\": \"{{gameId}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"spin"
+									]
+								},
+								"description": "Spin the slot machine with win ratio from game configuration"
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-d6bcd039-383e-4b57-81d6-fe9b5b6047d1"
+				},
+				{
+					"name": "Atomic MeltDown",
+					"item": [
+						{
+							"name": "Atomic MeltDown Spin",
+							"id": "44821427-8e9252cc-99c8-4071-a2f1-2e60539c3d0d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"betAmount\": 1.5,\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/monkeymadness/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"monkeymadness",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "simulate-rtp",
+							"id": "44821427-e6147744-71a0-4687-af1d-30c5fda06140",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\",\r\n    \"spinCount\": 10000,\r\n    \"betAmount\": 1.0,\r\n    \"winProbability\": 0.3\r\n}\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/MonkeyMadness/simulate-rtp-comprehensive",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"MonkeyMadness",
+										"simulate-rtp-comprehensive"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-e5f430ec-1b0f-49ae-acf5-fb90c612167f"
+				},
+				{
+					"name": "Green Machine",
+					"item": [
+						{
+							"name": "Green Machine Spin",
+							"id": "44821427-4712fa55-dd96-4370-88d4-caf3779f9db5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"betAmount\": 1.5,\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/monkeymadness/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"monkeymadness",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "simulate-rtp",
+							"id": "44821427-6f601385-c9a5-4883-a601-da8808c4783f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\",\r\n    \"spinCount\": 10000,\r\n    \"betAmount\": 1.0,\r\n    \"winProbability\": 0.3\r\n}\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/MonkeyMadness/simulate-rtp-comprehensive",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"MonkeyMadness",
+										"simulate-rtp-comprehensive"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-3599255c-7eec-4141-b7d6-b6178d26b59d"
+				},
+				{
+					"name": "Bullseye Slot",
+					"item": [
+						{
+							"name": "Bullseye Slot",
+							"id": "44821427-0f01a25b-39ad-4421-9e0f-3e31288015a0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"betAmount\": 1.5,\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/monkeymadness/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"monkeymadness",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "simulate-rtp",
+							"id": "44821427-41307a65-bef3-4524-9283-378aabad2608",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\",\r\n    \"spinCount\": 10000,\r\n    \"betAmount\": 1.0,\r\n    \"winProbability\": 0.3\r\n}\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/MonkeyMadness/simulate-rtp-comprehensive",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"MonkeyMadness",
+										"simulate-rtp-comprehensive"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-0afca465-aee2-45f4-8640-ca141c940ec3"
+				},
+				{
+					"name": "Ten Time Wins Slot",
+					"item": [
+						{
+							"name": "TenTimeWinsSlot",
+							"id": "44821427-b9a99469-6003-4673-a97b-2e5705e98ed9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"betAmount\": 1.5,\r\n    \"gameId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/monkeymadness/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"monkeymadness",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-7727e863-badc-4385-a8d2-bda73bfe61c0"
+				},
+				{
+					"name": "pirates-of-the-caribbean",
+					"item": [
+						{
+							"name": "pirates-of-the-caribbean",
+							"id": "44821427-352da0aa-014a-445e-aadd-06a380072930",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"7feaee8c-d41b-4569-9749-3d6e7e4356c3\",\r\n  \"betAmount\": 1.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/pirates-of-the-caribbean/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"pirates-of-the-caribbean",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-66cdd66e-ef59-405a-a052-166f8a978776"
+				},
+				{
+					"name": "Fruit Mary Slot",
+					"item": [
+						{
+							"name": "Fruit Mary Spin",
+							"id": "44821427-b61eb4be-c75b-417e-8ae4-30eb3dac4c2b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"854bd23c-0f79-4227-a3a1-4f0a72eda0c6\",\r\n  \"betAmount\": 1.00,\r\n  \"isFreeSpin\": true\r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/fruitmary/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"fruitmary",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-935abc3c-c37c-463c-bc9f-a87d0c260569"
+				},
+				{
+					"name": "Fruit Slots",
+					"item": [
+						{
+							"name": "Fruit Slots",
+							"id": "44821427-ce4d7311-bf05-491e-aaf8-074fe03b423e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"7feaee8c-d41b-4569-9749-3d6e7e4356c3\",\r\n  \"betAmount\": 1.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/pirates-of-the-caribbean/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"pirates-of-the-caribbean",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fruit Slots Copy",
+							"id": "44821427-dcf69fee-4cfe-4353-95df-93f6e406e7fb",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"7feaee8c-d41b-4569-9749-3d6e7e4356c3\",\r\n  \"betAmount\": 1.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/pirates-of-the-caribbean/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"pirates-of-the-caribbean",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-a8427104-18c1-48fb-b01f-ff5b6ee9c37c"
+				},
+				{
+					"name": "Fruit Paradise",
+					"item": [
+						{
+							"name": "Fruit Paradise",
+							"id": "44821427-a49d6696-83d9-4a06-bc83-1ca9b980c838",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"7feaee8c-d41b-4569-9749-3d6e7e4356c3\",\r\n  \"betAmount\": 1.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/pirates-of-the-caribbean/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"pirates-of-the-caribbean",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-0a539e77-96fc-4a02-be4e-64cc29d1848d"
+				},
+				{
+					"name": "Quick Hit Volcano",
+					"item": [
+						{
+							"name": "QuickHit Volcano",
+							"id": "44821427-f4f169ad-5e50-4dcd-927c-70758d6d317b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"7feaee8c-d41b-4569-9749-3d6e7e4356c3\",\r\n  \"betAmount\": 1.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/pirates-of-the-caribbean/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"pirates-of-the-caribbean",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-2cfa0aae-b8aa-4d11-8f0a-892837390877"
+				},
+				{
+					"name": "Bigger Base Bonanza",
+					"item": [
+						{
+							"name": "BiggerBaseBonana/Spin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8d74df84-9e41-4ce2-8c81-4b38f007fba1",
+										"exec": [
+											"var template = `\r",
+											"<canvas id=\"myChart\" height=\"75\"></canvas>\r",
+											"\r",
+											"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js\"></script>\r",
+											"\r",
+											"<script>\r",
+											"    var ctx = document.getElementById(\"myChart\");\r",
+											"\r",
+											"    var myChart = new Chart(ctx, {\r",
+											"        type: \"line\",\r",
+											"        data: {\r",
+											"            labels: [],\r",
+											"            datasets: [{\r",
+											"                label: 'Total Wins',\r",
+											"                data: [],\r",
+											"                borderColor: 'rgba(75, 192, 192, 1)',\r",
+											"                borderWidth: 2,\r",
+											"                fill: false\r",
+											"            }]\r",
+											"        },\r",
+											"        options: {\r",
+											"            title: {\r",
+											"                display: true,\r",
+											"                text: 'Total Wins Over Spins'\r",
+											"            },\r",
+											"            scales: {\r",
+											"                xAxes: [{\r",
+											"                    display: true,\r",
+											"                    scaleLabel: {\r",
+											"                        display: true,\r",
+											"                        labelString: 'Spin Number'\r",
+											"                    }\r",
+											"                }],\r",
+											"                yAxes: [{\r",
+											"                    display: true,\r",
+											"                    scaleLabel: {\r",
+											"                        display: true,\r",
+											"                        labelString: 'Total Win Amount'\r",
+											"                    }\r",
+											"                }]\r",
+											"            }\r",
+											"        }\r",
+											"    });\r",
+											"\r",
+											"    // Access the data passed to pm.visualizer.set() from the JavaScript code of the Visualizer template\r",
+											"    pm.getData(function (err, value) {\r",
+											"        myChart.data.datasets[0].data = value.response.totalWinData;\r",
+											"        myChart.data.labels = value.response.spinLabels;\r",
+											"        myChart.update();\r",
+											"    });\r",
+											"\r",
+											"</script>`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    var res = pm.response.json();\r",
+											"    \r",
+											"    // Assuming we want to visualize a single spin, we can create labels and data accordingly\r",
+											"    var visualizerData = {\r",
+											"        spinLabels: ['Spin 1'], // This can be expanded if you have multiple spins\r",
+											"        totalWinData: [res.totalWin] // This is the total win for the current spin\r",
+											"    };\r",
+											"\r",
+											"    return { response: visualizerData };\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"id": "44821427-f9e4a220-f3f4-48cb-a5c3-46a679e8c5e4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"requestId\": \"89b9e7af-225a-4e3e-9751-e1efbf16b62f\",\n  \"gameId\": \"0f007f8e-4123-44ce-82c5-3963aeff522a\",\n  \"betAmount\": 0.12 ,\n  \"isFreeSpin\": false,\n  \"wildMultiplier\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/biggerbassbonanza/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"biggerbassbonanza",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-700cc262-dec2-40d6-8c5b-07c7cf6583ba"
+				},
+				{
+					"name": "Zombie Paradies",
+					"item": [
+						{
+							"name": "Zombie Paradies",
+							"id": "44821427-b916994b-af39-46fe-b720-da42ba028ad0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"7feaee8c-d41b-4569-9749-3d6e7e4356c3\",\r\n  \"betAmount\": 1.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/zombieparadies/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"zombieparadies",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-b7fa7175-2c0c-42f5-832a-51edd04faefb"
+				},
+				{
+					"name": "Head N Tails",
+					"item": [
+						{
+							"name": "Head n Tails",
+							"id": "44821427-25787836-ada2-449d-8116-a99f20b1b133",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"requestId\": \"{{gameId}}\",\r\n  \"gameId\": \"7feaee8c-d41b-4569-9749-3d6e7e4356c3\",\r\n  \"betAmount\": 1.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/zombieparadies/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"zombieparadies",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-a3b61003-4276-4fc0-9bff-73fd3ec29540"
+				},
+				{
+					"name": "crazy7/Spin",
+					"id": "44821427-41fe201b-2345-4fd4-9496-531c764d8216",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"betAmount\": 100,\n    \"gameId\": \"{{gameId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/slot/spin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"slot",
+								"spin"
+							]
+						},
+						"description": "Spin the slot machine with win ratio from game configuration"
+					},
+					"response": []
+				},
+				{
+					"name": "Simulate Spins",
+					"id": "44821427-006c1880-24d0-4e5f-8cc9-19c5e4b09ab9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gameId\": \"{{gameId}}\",\n    \"betAmount\": 100,\n    \"numSpins\": 1000\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/slot/simulate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"slot",
+								"simulate"
+							]
+						},
+						"description": "Simulate multiple spins and get RTP analysis"
+					},
+					"response": []
+				},
+				{
+					"name": "Test Win Ratio",
+					"id": "44821427-a215ac01-a333-4153-859e-1c54ffab0a10",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gameId\": \"{{gameId}}\",\n    \"betAmount\": 100,\n    \"numSpins\": 100,\n    \"overrideWinRatio\": 0.7\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/slot/test-win-ratio",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"slot",
+								"test-win-ratio"
+							]
+						},
+						"description": "Test different win ratios without changing game configuration"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Win Ratio",
+					"id": "44821427-37dfab28-606f-4b44-85d7-ec527b8ad013",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gameId\": \"{{gameId}}\",\n    \"winRatio\": 0.6\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/slot/update-win-ratio",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"slot",
+								"update-win-ratio"
+							]
+						},
+						"description": "Update the win ratio for a game (0.0 to 1.0)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Simulation Records",
+					"id": "44821427-215acec9-6690-4312-bed2-1a338599b227",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/slot/simulation-records?gameId={{gameId}}&simulationType=standard&page=1&pageSize=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"slot",
+								"simulation-records"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "{{gameId}}",
+									"description": "Filter by game ID"
+								},
+								{
+									"key": "simulationType",
+									"value": "standard",
+									"description": "Filter by simulation type (standard, test, override)"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number"
+								},
+								{
+									"key": "pageSize",
+									"value": "20",
+									"description": "Number of records per page"
+								}
+							]
+						},
+						"description": "Get paginated list of simulation records with optional filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Simulation Record by ID",
+					"id": "44821427-432db408-5df1-4ccc-b0ce-f59266ff467e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/slot/simulation-records/{{simulationRecordId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"slot",
+								"simulation-records",
+								"{{simulationRecordId}}"
+							]
+						},
+						"description": "Get detailed information about a specific simulation record"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-6f3df812-25ca-481b-9825-a337cd559f7c"
+		},
+		{
+			"name": "Game Sessions",
+			"item": [
+				{
+					"name": "Start Game Session",
+					"id": "44821427-e9c1278f-73b1-4273-b5d9-e4e62d1ae570",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gameId\": \"{{gameId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/game-sessions/start",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"game-sessions",
+								"start"
+							]
+						},
+						"description": "Start a new game session"
+					},
+					"response": []
+				},
+				{
+					"name": "End Game Session",
+					"id": "44821427-951b82d5-6a38-4bf5-a308-a84bfa876300",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"coinsWon\": 100,\n    \"coinsLost\": 50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/game-sessions/{{sessionId}}/end",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"game-sessions",
+								"{{sessionId}}",
+								"end"
+							]
+						},
+						"description": "End a game session"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Session",
+					"id": "44821427-82678610-b2fc-4528-baa0-6ed93778bc1d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/game-sessions/current",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"game-sessions",
+								"current"
+							]
+						},
+						"description": "Get current active game session"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-5ab42790-2aff-48cc-9013-5b3d83d6b575"
+		},
+		{
+			"name": "Game Progress",
+			"item": [
+				{
+					"name": "Get Game Progress",
+					"id": "44821427-884b90b5-5e1e-4f03-8658-ec81839b7779",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/gameprogress/{{gameId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"gameprogress",
+								"{{gameId}}"
+							]
+						},
+						"description": "Get user's progress for a specific game"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Game Progress",
+					"id": "44821427-f86f5212-f152-4246-9f4b-2df80488da47",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"state\": {},\n    \"totalPlaytime\": 3600,\n    \"favorite\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/gameprogress/{{gameId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"gameprogress",
+								"{{gameId}}"
+							]
+						},
+						"description": "Update user's progress for a specific game"
+					},
+					"response": []
+				},
+				{
+					"name": "Unlock Achievement",
+					"id": "44821427-19875e65-f40e-40f6-830d-9f7f1c7f460f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"achievementId\": \"{{achievementId}}\",\n    \"gameId\": \"{{gameId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/gameprogress/achievements/unlock",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"gameprogress",
+								"achievements",
+								"unlock"
+							]
+						},
+						"description": "Unlock an achievement"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Achievements",
+					"id": "44821427-95f87fe4-6e2e-4c36-bab4-52a41a15ef7b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/gameprogress/achievements",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"gameprogress",
+								"achievements"
+							]
+						},
+						"description": "Get user's achievements"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-65ff9dd7-0e5b-44c6-aeb4-a8dc9f16411e"
+		},
+		{
+			"name": "Achievements",
+			"item": [
+				{
+					"name": "Get All Achievements",
+					"id": "44821427-811a106c-84c1-4a67-aec6-c7afc03c6e66",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/achievements",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"achievements"
+							]
+						},
+						"description": "Get all available achievements"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Achievements",
+					"id": "44821427-88e858d8-2501-4ad8-b2a1-03da49707d33",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/achievements/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"achievements",
+								"user"
+							]
+						},
+						"description": "Get current user's achievements"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-531c0e68-2706-4ba4-908a-ad8c358204ca"
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get All Events",
+					"id": "44821427-68948deb-1923-4032-bef8-881fe7a65424",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/event",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						},
+						"description": "Get all events"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Events",
+					"id": "44821427-5db2cfa9-273a-4434-aa6b-5c09081c5092",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/event/active",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"active"
+							]
+						},
+						"description": "Get all active events"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event by ID",
+					"id": "44821427-db44f874-35c9-4de1-ae96-6b4cb08e6108",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/event/{{eventId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"{{eventId}}"
+							]
+						},
+						"description": "Get event by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event (Admin)",
+					"id": "44821427-a05192c0-ff31-4e81-b7db-e4f50a4bade4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Event\",\n    \"description\": \"Event Description\",\n    \"imageUrl\": \"https://example.com/image.jpg\",\n    \"startTime\": \"2024-03-20T10:00:00Z\",\n    \"endTime\": \"2024-03-21T10:00:00Z\",\n    \"isActive\": true,\n    \"priority\": 1,\n    \"eventBottom\": \"Event bottom text\",\n    \"showOnce\": false,\n    \"targetType\": \"player\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/event",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						},
+						"description": "Create new event (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event (Admin)",
+					"id": "44821427-a9b41e60-ceb8-4466-91eb-45c86daa080a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Event\",\n    \"description\": \"Updated Description\",\n    \"imageUrl\": \"https://example.com/updated-image.jpg\",\n    \"startTime\": \"2024-03-20T10:00:00Z\",\n    \"endTime\": \"2024-03-21T10:00:00Z\",\n    \"isActive\": true,\n    \"priority\": 2,\n    \"eventBottom\": \"Updated bottom text\",\n    \"showOnce\": true,\n    \"targetType\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/event/{{eventId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"{{eventId}}"
+							]
+						},
+						"description": "Update existing event (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event (Admin)",
+					"id": "44821427-a98ca723-f18e-4ad0-b18a-890fb6aa393c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/event/{{eventId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"{{eventId}}"
+							]
+						},
+						"description": "Delete event (Admin only)"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-98d08217-de59-47c7-8a5e-f5d415a6181b"
+		},
+		{
+			"name": "Spin Wheel",
+			"item": [
+				{
+					"name": "Get Spin Status",
+					"id": "44821427-14acf89f-219b-4317-b42d-ae42c7fefae2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/spinwheel/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"spinwheel",
+								"status"
+							]
+						},
+						"description": "Get spin wheel status for current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Spin Wheel",
+					"id": "44821427-b752481a-939f-45d0-82f4-a79e5482b716",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/spinwheel/spin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"spinwheel",
+								"spin"
+							]
+						},
+						"description": "Spin the wheel and get reward"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spin History",
+					"id": "44821427-0a9a44eb-199a-49bd-abbc-92e851b6c331",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/spinwheel/history",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"spinwheel",
+								"history"
+							]
+						},
+						"description": "Get user's spin wheel history"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-df2ea2b5-85a0-4bd9-a591-0d3067b9ce04"
+		},
+		{
+			"name": "Daily Rewards",
+			"item": [
+				{
+					"name": "Get Daily Reward Status",
+					"id": "44821427-ae5412fd-68d1-4a74-b3d5-0f19442654fd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/daily-rewards/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"daily-rewards",
+								"status"
+							]
+						},
+						"description": "Get daily reward status"
+					},
+					"response": []
+				},
+				{
+					"name": "Claim Daily Reward",
+					"id": "44821427-7e42df67-a441-4dca-bae1-72c53858f724",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/rewards/daily/claim",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"rewards",
+								"daily",
+								"claim"
+							]
+						},
+						"description": "Claim daily reward"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Streak Count",
+					"id": "44821427-08b0c7ec-b747-4a26-b340-c55abf6d7d62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/rewards/streak",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"rewards",
+								"streak"
+							]
+						},
+						"description": "Get user's daily reward streak count"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-98b498c1-2066-465d-bbe0-f006dc7fe25a"
+		},
+		{
+			"name": "Tournaments",
+			"item": [
+				{
+					"name": "Get All Tournaments",
+					"id": "44821427-137f61e6-1db4-428b-b935-100fa2fd39e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"tournaments"
+							]
+						},
+						"description": "Get all tournaments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tournament by ID",
+					"id": "44821427-ac2f7289-8074-4b8f-a892-326b80f88a8b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/tournaments/{{tournamentId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"tournaments",
+								"{{tournamentId}}"
+							]
+						},
+						"description": "Get tournament details by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tournament",
+					"id": "44821427-1ebe2f16-89bb-49bb-be9a-90b407c7e1b1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New Tournament\",\n    \"description\": \"Tournament Description\",\n    \"startTime\": \"2024-03-20T10:00:00Z\",\n    \"endTime\": \"2024-03-21T10:00:00Z\",\n    \"entryFee\": 100,\n    \"prizePool\": 1000\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"tournaments"
+							]
+						},
+						"description": "Create new tournament"
+					},
+					"response": []
+				},
+				{
+					"name": "Join Tournament",
+					"id": "44821427-e14926ce-df58-4016-bbc9-718e32fe414f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/tournaments/{{tournamentId}}/join",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"tournaments",
+								"{{tournamentId}}",
+								"join"
+							]
+						},
+						"description": "Join a tournament"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-b19a0d0a-6824-4011-8607-065743d2c93c"
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Get User Transactions",
+					"id": "44821427-0e14d79b-b113-45c4-b7e8-94a40181a868",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						},
+						"description": "Get current user's transactions"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transactions by User (Admin)",
+					"id": "44821427-b3cc2aed-7dc0-45a6-b4e0-55a5132478fc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions",
+								"{{userId}}"
+							]
+						},
+						"description": "Get transactions for specific user (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Transaction",
+					"id": "44821427-607f2220-b036-451e-b060-d7ea95b75ffc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userId}}\",\n    \"amount\": 100,\n    \"type\": \"win\",\n    \"note\": \"Game win\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						},
+						"description": "Add a new transaction"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-25d28661-f473-47ee-9f1c-060db23847b9"
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Get All Notifications",
+					"id": "44821427-43663b20-aaf8-44d7-a117-87b9e9649ae4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Get all active notifications for the current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notifications by Type",
+					"id": "44821427-b2d21ed2-411e-48a0-8a5e-6a05639a2f5d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications/{{notificationType}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications",
+								"{{notificationType}}"
+							]
+						},
+						"description": "Get notifications by specific type (e.g., session, general)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Latest Notification by Type",
+					"id": "44821427-4746dd8a-f9bb-4ed4-b77b-e63ea30d6cf1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications/{{notificationType}}/latest",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications",
+								"{{notificationType}}",
+								"latest"
+							]
+						},
+						"description": "Get the latest notification of a specific type"
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Notification as Read",
+					"id": "44821427-ca5aa946-54ff-4c52-970b-ad8cd53aed78",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications/{{notificationId}}/mark-read",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications",
+								"{{notificationId}}",
+								"mark-read"
+							]
+						},
+						"description": "Mark a specific notification as read"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Notification",
+					"id": "44821427-cc38c8db-6edc-46ad-8f32-66887bac98f1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Test Notification\",\n    \"message\": \"This is a test notification\",\n    \"notificationType\": \"general\",\n    \"expiresAt\": \"2024-12-31T23:59:59Z\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"notifications"
+							]
+						},
+						"description": "Create a new notification for the current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Session Logs",
+					"id": "44821427-5427a439-7166-401b-b503-035597605b82",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/session-logs/active",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"session-logs",
+								"active"
+							]
+						},
+						"description": "Get all active session logs for the current user (for Unity client)"
+					},
+					"response": []
+				},
+				{
+					"name": "Mark All Session Logs as Read",
+					"id": "44821427-56fbeb83-74df-4e6d-8c31-b22f2c529332",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/session-logs/mark-all-read",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"session-logs",
+								"mark-all-read"
+							]
+						},
+						"description": "Mark all active session logs as read (for Unity client)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Session Logs by Action",
+					"id": "44821427-ba22e9fb-8322-4c1a-b022-7690bd55025c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/session-logs/{{action}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"session-logs",
+								"{{action}}"
+							]
+						},
+						"description": "Get session logs by specific action (e.g., new_device_login, logout, expired)"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-3f0d78c9-4f5f-47f6-9a1b-654097b7fcd5"
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "Add to Favorites",
+					"id": "44821427-251a046c-69d9-4ffc-a6f3-6b77ef9d96c1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userId}}\",\n    \"gameId\": \"{{gameId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/favorites/add",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"add"
+							]
+						},
+						"description": "Add a game to favorites"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove from Favorites",
+					"id": "44821427-b304972c-0b98-4a43-aee4-a47da9f05fa4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userId}}\",\n    \"gameId\": \"{{gameId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/favorites/remove",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"remove"
+							]
+						},
+						"description": "Remove a game from favorites"
+					},
+					"response": []
+				},
+				{
+					"name": "Set Game Favorite (Alternative)",
+					"id": "44821427-bb246d20-b2b4-45ad-b276-5c3eadf795bc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "true"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/game-progress/{{gameId}}/favorite",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"game-progress",
+								"{{gameId}}",
+								"favorite"
+							]
+						},
+						"description": "Set game as favorite using game-progress endpoint"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Game Favorite (Alternative)",
+					"id": "44821427-7d0ddde0-4a28-40af-9d17-9fd98010a356",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "false"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/game-progress/{{gameId}}/favorite",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"game-progress",
+								"{{gameId}}",
+								"favorite"
+							]
+						},
+						"description": "Remove game from favorites using game-progress endpoint"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-d9b9ac2a-5644-4faf-983e-dbad59674036"
+		},
+		{
+			"name": "Config",
+			"item": [
+				{
+					"name": "Get Main Menu Config",
+					"id": "44821427-22bc0bdc-442a-4028-bc30-9dae264f515f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/config/main-menu",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"config",
+								"main-menu"
+							]
+						},
+						"description": "Get main menu configuration"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-7942045b-8506-4aab-9837-c34a0c1165ee"
+		},
+		{
+			"name": "Login Notifications",
+			"item": [
+				{
+					"name": "Get Active Login Notifications",
+					"id": "44821427-32f9cf31-7550-4bd2-b6cd-6680d05fba0b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/login-notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login-notifications"
+							]
+						},
+						"description": "Get active login notifications for the current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Login Notifications (Admin)",
+					"id": "44821427-a646cd35-868e-49b5-84a5-89c486fcbc33",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/login-notifications/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login-notifications",
+								"all"
+							]
+						},
+						"description": "Get all active login notifications (Admin only - shows notifications for all users)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Login Notification by ID",
+					"id": "44821427-18c349b0-1f26-41ca-9be8-5a4e77b06ef0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/login-notifications/{{loginNotificationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login-notifications",
+								"{{loginNotificationId}}"
+							]
+						},
+						"description": "Get a specific login notification by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Login Notification (Admin)",
+					"id": "44821427-bb5195e6-3c72-4835-9cd9-98328d91bc4a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Welcome Back!\",\n    \"message\": \"We're glad to see you again. Check out our new features!\",\n    \"targetUsers\": [\"user-uuid-here\", \"another-user-uuid\"],\n    \"showOnce\": false,\n    \"expiresAt\": \"2024-12-31T23:59:59Z\",\n    \"type\": \"test image\",\n    \"targetType\": \"singleuser\",\n    \"imageUrl\": \"https://example.com/welcome-image.jpg\",\n    \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login-notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login-notifications"
+							]
+						},
+						"description": "Create a new login notification (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Login Notification (Admin)",
+					"id": "44821427-4d5f4a8f-2c7f-463a-abc9-3a34f844bebd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Welcome Message\",\n    \"message\": \"This is an updated welcome message for all users.\",\n    \"targetUsers\": [],\n    \"showOnce\": true,\n    \"expiresAt\": \"2024-12-31T23:59:59Z\",\n    \"type\": \"test image\",\n    \"targetType\": \"admin\",\n    \"imageUrl\": \"https://example.com/updated-image.jpg\",\n    \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login-notifications/{{loginNotificationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login-notifications",
+								"{{loginNotificationId}}"
+							]
+						},
+						"description": "Update an existing login notification (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Login Notification (Admin)",
+					"id": "44821427-51721905-b1ea-4a5a-8248-e451dc735553",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/login-notifications/{{loginNotificationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login-notifications",
+								"{{loginNotificationId}}"
+							]
+						},
+						"description": "Delete a login notification (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update ShowOnce Status (Admin)",
+					"id": "44821427-921b1c1b-f5ab-4ea0-a7ad-85ae74975579",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"showOnce\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login-notifications/{{loginNotificationId}}/show-once",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login-notifications",
+								"{{loginNotificationId}}",
+								"show-once"
+							]
+						},
+						"description": "Update only the ShowOnce status of a login notification (Admin only)"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-8388f4c5-f2ce-403d-a5ed-7dea2b838cdb"
+		},
+		{
+			"name": "Fishing Game",
+			"item": [
+				{
+					"name": "Mermaid",
+					"id": "44821427-369754f3-3afb-4724-8f8c-56186761c866",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"requestId\": \"f49c2fa7-99f4-4b9b-94fc-80b0e6fc4e46\",\r\n  \"gameId\": \"78aca644-4bcd-4c3c-b67d-a7f8b8cde1b3\",\r\n  \"fishCount\": 5,\r\n  \"betAmount\": 100,\r\n  \"winAmount\": 50\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/mermaid/spawn-profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"mermaid",
+								"spawn-profile"
+							]
+						},
+						"description": "Spin the slot machine with win ratio from game configuration"
+					},
+					"response": []
+				}
+			],
+			"id": "44821427-846a4865-2e70-43b8-b400-6820984b251c"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "790c3377-a6e3-4c10-8582-1df9b7183fb6"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Auto-extract token from login/register responses",
+					"if (pm.response.code === 200) {",
+					"    const response = pm.response.json();",
+					"    if (response.token) {",
+					"        pm.collectionVariables.set('token', response.token);",
+					"        console.log('Token extracted and saved:', response.token.substring(0, 20) + '...');",
+					"    }",
+					"    ",
+					"    // Extract user ID if available",
+					"    if (response.user && response.user.id) {",
+					"        pm.collectionVariables.set('userId', response.user.id);",
+					"        console.log('User ID extracted:', response.user.id);",
+					"    }",
+					"    ",
+					"    // Log session information if available",
+					"    if (response.session_message) {",
+					"        console.log('Session message:', response.session_message);",
+					"    }",
+					"    if (response.is_new_session) {",
+					"        console.log('New session created - previous device logged out');",
+					"    }",
+					"}",
+					"",
+					"// Auto-extract notification ID from notification responses",
+					"if (pm.response.code === 200 && pm.request.url.path.includes('notifications')) {",
+					"    const response = pm.response.json();",
+					"    if (response.id) {",
+					"        pm.collectionVariables.set('notificationId', response.id);",
+					"        console.log('Notification ID extracted:', response.id);",
+					"    }",
+					"}",
+					"",
+					"// Auto-extract login notification ID from login notification responses",
+					"if (pm.response.code === 200 && pm.request.url.path.includes('login-notifications')) {",
+					"    const response = pm.response.json();",
+					"    if (response.data && response.data.id) {",
+					"        pm.collectionVariables.set('loginNotificationId', response.data.id);",
+					"        console.log('Login Notification ID extracted:', response.data.id);",
+					"    }",
+					"    if (response.data && Array.isArray(response.data) && response.data.length > 0) {",
+					"        pm.collectionVariables.set('loginNotificationId', response.data[0].id);",
+					"        console.log('First Login Notification ID extracted:', response.data[0].id);",
+					"    }",
+					"}"
+				],
+				"id": "ed3a987a-bd4c-4182-acff-759ad9ffb64b"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5036",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your-jwt-token-here",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "user-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "gameId",
+			"value": "game-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "eventId",
+			"value": "event-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "tournamentId",
+			"value": "tournament-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "action",
+			"value": "new_device_login",
+			"type": "string"
+		},
+		{
+			"key": "sessionId",
+			"value": "session-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "notificationId",
+			"value": "notification-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "notificationType",
+			"value": "session",
+			"type": "string"
+		},
+		{
+			"key": "achievementId",
+			"value": "achievement-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "testWinRatio",
+			"value": "0.7",
+			"type": "string"
+		},
+		{
+			"key": "testBetAmount",
+			"value": "100",
+			"type": "string"
+		},
+		{
+			"key": "testNumSpins",
+			"value": "100",
+			"type": "string"
+		},
+		{
+			"key": "simulationRecordId",
+			"value": "simulation-record-uuid-here",
+			"type": "string"
+		},
+		{
+			"key": "weekStartDate",
+			"value": "2024-01-01",
+			"type": "string"
+		},
+		{
+			"key": "loginNotificationId",
+			"value": "login-notification-uuid-here",
+			"type": "string"
+		}
+	]
+}
