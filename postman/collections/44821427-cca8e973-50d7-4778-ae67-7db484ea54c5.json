@@ -1112,10 +1112,10 @@
 			"name": "Slot Games",
 			"item": [
 				{
-					"name": "Sahara Riches Copy",
+					"name": "Panda Fortune",
 					"item": [
 						{
-							"name": "Sahara Riches Spin",
+							"name": "Panda Fortune Spin",
 							"id": "44821427-402068d6-79a7-41aa-bced-5917b971c868",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
