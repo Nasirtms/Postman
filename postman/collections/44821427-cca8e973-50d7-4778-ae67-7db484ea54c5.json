@@ -1136,7 +1136,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"gameId\": \"d4550eab-b6d7-4ad6-8065-2178823848f1\",\r\n  \"requestId\": \"{{$guid}}\",\r\n  \"betAmount\": 1.0,\r\n  \"isFreeSpin\": false,\r\n  \"scatterMultiplier\": 1.5,\r\n  \"lockedCashCollectSlots\": [\r\n//     {\r\n//       \"reelIndex\": 4,\r\n//       \"slotIndex\": 1\r\n//     }\r\n  ]\r\n}",
+									"raw": "{\r\n    \"gameId\": \"355e1244-7597-4aa4-b8b0-8882ad0feaa4\",\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"betAmount\": 30.0,\r\n    \"isFreeSpin\": false\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1144,14 +1144,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/api/slot/saharariches/spin",
+									"raw": "{{baseUrl}}/api/slot/pandafortune/spin",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"api",
 										"slot",
-										"saharariches",
+										"pandafortune",
 										"spin"
 									]
 								}
