@@ -1112,6 +1112,56 @@
 			"name": "Slot Games",
 			"item": [
 				{
+					"name": "Sahara Riches Copy",
+					"item": [
+						{
+							"name": "Sahara Riches Spin",
+							"id": "44821427-402068d6-79a7-41aa-bced-5917b971c868",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"gameId\": \"d4550eab-b6d7-4ad6-8065-2178823848f1\",\r\n  \"requestId\": \"{{$guid}}\",\r\n  \"betAmount\": 1.0,\r\n  \"isFreeSpin\": false,\r\n  \"scatterMultiplier\": 1.5,\r\n  \"lockedCashCollectSlots\": [\r\n//     {\r\n//       \"reelIndex\": 4,\r\n//       \"slotIndex\": 1\r\n//     }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/slot/saharariches/spin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"slot",
+										"saharariches",
+										"spin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "44821427-6ab3fae8-cf5b-42dd-930d-563ed09e1a32"
+				},
+				{
 					"name": "Cloepatra",
 					"item": [
 						{
