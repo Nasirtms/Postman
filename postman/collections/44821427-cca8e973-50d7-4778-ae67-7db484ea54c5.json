@@ -1136,7 +1136,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"gameId\": \"355e1244-7597-4aa4-b8b0-8882ad0feaa4\",\r\n    \"requestId\": \"{{$guid}}\",\r\n    \"betAmount\": 30.0,\r\n    \"isFreeSpin\": false\r\n}",
+									"raw": "{\r\n    \"gameId\": \"355e1244-7597-4aa4-b8b0-8882ad0feaa4\",\r\n    \"requestId\": \"{{$guid}}\",\r\n     \"betAmount\": 1.0,\r\n    \"isFreeSpin\": true,\r\n    \"freeSpinCurrentSpin\": 2,\r\n    \"freeSpinType\": \"Second\",\r\n    \"frozenColumns\": [3]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
